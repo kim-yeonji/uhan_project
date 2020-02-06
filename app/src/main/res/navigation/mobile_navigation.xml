@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_pub">
+
+    <fragment
+        android:id="@+id/navigation_video"
+        android:name="base.medium.uhan.ui.video.VideoFragment"
+        android:label="우한 폐렴, 코로나 바이러스 관련 영상"
+        tools:layout="@layout/fragment_faq" />
+
+    <fragment
+        android:id="@+id/navigation_pub"
+        android:name="base.medium.uhan.ui.pub.PubFragment"
+        android:label="질병관리본부 보도자료"
+        tools:layout="@layout/fragment_pub" />
+
+    <fragment
+        android:id="@+id/navigation_news"
+        android:name="base.medium.uhan.ui.news.NewsFragment"
+        android:label="우한 폐렴, 코로나 바이러스 관련 기사"
+        tools:layout="@layout/fragment_video" />
+
+    <fragment
+        android:id="@+id/navigation_faq"
+        android:name="base.medium.uhan.ui.faq.FaqFragment"
+        android:label="궁금한점(FAQ)"
+        tools:layout="@layout/fragment_video" />
+</navigation>

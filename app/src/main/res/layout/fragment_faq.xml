@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="vm"
+            type="base.medium.uhan.ui.faq.FaqFragment" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ToggleButton
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/check_state"
+        android:onClick="@{(v) -> vm.viewFaq(v)}"
+        android:tag="0"
+        android:text="여행관련"
+        android:textColor="#000000"
+        android:textOff="여행관련"
+        android:textOn="여행관련" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/one"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+
+    <ToggleButton
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(v) -> vm.viewFaq(v)}"
+        android:tag="1"
+        android:background="@drawable/check_state"
+        android:textColor="#000000"
+        android:text="검사관련"
+        android:textOn="검사관련"
+        android:textOff="검사관련" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/three"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+
+    <ToggleButton
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(v) -> vm.viewFaq(v)}"
+        android:background="@drawable/check_state"
+        android:textColor="#000000"
+        android:text="감염원 및 전파 관련"
+        android:textOff="감염원 및 전파 관련"
+        android:textOn="감염원 및 전파 관련"
+        android:tag="2"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/four"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+
+    <ToggleButton
+        android:id="@+id/button5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/check_state"
+        android:onClick="@{(v) -> vm.viewFaq(v)}"
+        android:tag="3"
+        android:text="검역"
+        android:textColor="#000000"
+        android:textOff="검역"
+        android:textOn="검역" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/five"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ToggleButton
+        android:id="@+id/button6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/check_state"
+        android:onClick="@{(v) -> vm.viewFaq(v)}"
+        android:tag="4"
+        android:text="접촉자"
+        android:textColor="#000000"
+        android:textOff="접촉자"
+        android:textOn="접촉자" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/six"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ToggleButton
+        android:id="@+id/button7"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/check_state"
+        android:onClick="@{(v) -> vm.viewFaq(v)}"
+        android:tag="5"
+        android:text="감염병 문의"
+        android:textColor="#000000"
+        android:textOff="감염병 문의"
+        android:textOn="감염병 문의" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/seven"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ToggleButton
+        android:id="@+id/button8"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/check_state"
+        android:onClick="@{(v) -> vm.viewFaq(v)}"
+        android:tag="6"
+        android:text="치료"
+        android:textColor="#000000"
+        android:textOff="치료"
+        android:textOn="치료" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/eight"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:visibility="gone"/>
+
+    <ToggleButton
+        android:id="@+id/button9"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/check_state"
+        android:onClick="@{(v) -> vm.viewFaq(v)}"
+        android:tag="7"
+        android:text="기타"
+        android:textColor="#000000"
+        android:textOff="기타"
+        android:textOn="기타" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/nine"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:visibility="gone"/>
+</LinearLayout>
+    </ScrollView>
+</layout>
