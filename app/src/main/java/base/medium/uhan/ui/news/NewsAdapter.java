@@ -60,7 +60,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             thumnail = itemView.findViewById(R.id.news_icon);
             share = itemView.findViewById(R.id.button_share);
 
-            Log.d("ddd", "ViewHolder");
+            Log.d("check_state", "ViewHolder");
         }
 
     }
@@ -83,7 +83,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         View view = inflater.inflate(R.layout.item, parent, false);
         NewsAdapter.ViewHolder vh = new NewsAdapter.ViewHolder(view);
 
-        Log.d("ddd", "onCreateViewHolder");
+        Log.d("check_state", "onCreateViewHolder");
 
         return vh;
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -23,6 +23,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:textSize="15dp" />
 
         <TextView
@@ -32,6 +33,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="#4CAF50"
+            android:textStyle="bold"
             android:textSize="15dp" />
 
         <TextView
@@ -41,6 +43,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="#FFC107"
+            android:textStyle="bold"
             android:textSize="15dp" />
     </LinearLayout>
 
@@ -73,17 +76,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
+    <com.google.android.ads.nativetemplates.TemplateView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/my_template"
+        app:gnt_template_type="@layout/gnt_small_template_view"
 
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        app:adSize="SMART_BANNER"
-        app:adUnitId="ca-app-pub-4839780422288243/6506760845"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

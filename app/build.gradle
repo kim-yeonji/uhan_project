@@ -8,10 +8,11 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "base.medium.uhan"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        compileSdkVersion 29
+        versionCode 7
+        versionName "1.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -60,5 +61,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.google.android.gms:play-services-ads:18.3.0'
+    implementation project(':nativetemplates')
+
     provided 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 }

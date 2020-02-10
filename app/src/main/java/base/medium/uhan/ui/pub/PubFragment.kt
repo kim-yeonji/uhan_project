@@ -61,9 +61,7 @@ class PubFragment : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
-                val totalItemCount = recyclerView!!.layoutManager!!.itemCount
-                val lastVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition()
-                if (totalItemCount == lastVisibleItemPosition + 1) {
+                if (newState == RecyclerView.SCROLL_STATE_SETTLING) {
 
                     var that = this
                     recyclerView.removeOnScrollListener(that)

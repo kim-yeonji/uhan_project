@@ -54,7 +54,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
             thumnail = itemView.findViewById(R.id.news_icon);
             share = itemView.findViewById(R.id.button_share);
 
-            Log.d("ddd", "ViewHolder");
+            Log.d("check_state", "ViewHolder");
         }
 
     }
@@ -77,7 +77,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         View view = inflater.inflate(R.layout.item, parent, false);
         VideoAdapter.ViewHolder vh = new VideoAdapter.ViewHolder(view);
 
-        Log.d("ddd", "onCreateViewHolder");
+        Log.d("check_state", "onCreateViewHolder");
 
         return vh;
     }

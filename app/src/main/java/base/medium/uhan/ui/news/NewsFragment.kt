@@ -17,34 +17,32 @@ import kotlinx.coroutines.launch
  * A placeholder fragment containing a simple view.
  */
 class NewsFragment : Fragment() {
+    private var recyclerView :RecyclerView? = null
     private var newsViewModel: NewsViewModel? = null
     private var newsAdapter : NewsAdapter? = null
     private var th = this
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        newsViewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
-        newsViewModel!!.context = activity
-    }
 
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?): View? {
 
+        newsViewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
+        newsViewModel!!.context = activity
+
         val root = inflater.inflate(R.layout.fragment_news, container, false)
 
         val layoutManager = LinearLayoutManager(context)
 
-        val recyclerView = root.findViewById<View>(R.id.news_recycler) as RecyclerView
-        recyclerView.layoutManager = layoutManager
+        recyclerView = root.findViewById<View>(R.id.news_recycler) as RecyclerView
+        recyclerView!!.layoutManager = layoutManager
 
         newsAdapter = NewsAdapter(activity)
 
         newsAdapter!!.setOnClick(newsViewModel!!.getOnClick())
         newsAdapter!!.setOnShare(newsViewModel!!.getOnshare())
 
-        recyclerView.adapter = newsAdapter
+        recyclerView!!.adapter = newsAdapter
 
 
         lifecycleScope.launch {
@@ -52,26 +50,24 @@ class NewsFragment : Fragment() {
             newsViewModel!!.list.value = newsViewModel!!.setNews().await()
             newsViewModel!!.getData().observe(th, Observer { s ->
                 newsAdapter!!.setList(s)
-                recyclerView.adapter!!.notifyDataSetChanged()
+                recyclerView!!.adapter = newsAdapter
 
             })
 
         }
 
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        recyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
-                val totalItemCount = recyclerView!!.layoutManager!!.itemCount
-                val lastVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition()
-                if (totalItemCount == lastVisibleItemPosition + 1) {
+                if (newState == RecyclerView.SCROLL_STATE_SETTLING) {
 
                     var that = this
                     recyclerView.removeOnScrollListener(that)
 
 
-                    var job = lifecycleScope.launch {
+                    lifecycleScope.launch {
                         newsViewModel!!.page += 1
                         newsAdapter!!.setList(newsViewModel!!.setNews().await())
                         recyclerView.adapter!!.notifyDataSetChanged()

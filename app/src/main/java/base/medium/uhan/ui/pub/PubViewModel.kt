@@ -140,12 +140,13 @@ class PubViewModel : ViewModel() {
             e.printStackTrace();
         } catch (e: IOException) { // for openConnection().
             e.printStackTrace();
+
         } finally {
             if (urlConn != null)
                 urlConn.disconnect();
         }
 
-        null;
+        null
 
     }
 

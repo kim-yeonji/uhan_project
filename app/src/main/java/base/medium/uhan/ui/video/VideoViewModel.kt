@@ -3,6 +3,7 @@ package base.medium.uhan.ui.video
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -21,8 +22,14 @@ import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
+import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
+import javax.net.ssl.HttpsURLConnection
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import java.net.URLEncoder
+
 
 class VideoViewModel : ViewModel() {
 
@@ -49,10 +56,12 @@ class VideoViewModel : ViewModel() {
             var result = ""
 
             try {
-                val url = URL("https://www.googleapis.com/youtube/v3/search?part=snippet&q=코로나 바이러스&maxResults=40&key=AIzaSyAarqxB-Ed5wVFXAOn04YHbQhJG7cJxRGY&sp=CAI%253D")
-                val con = url.openConnection()
-                val `is` = con.getInputStream()
-                val isr = InputStreamReader(`is`)
+                val keyword = URLEncoder.encode("코로나바이러스", "UTF-8")
+                val url = URL("https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + keyword + "&maxResults=30&key=AIzaSyAarqxB-Ed5wVFXAOn04YHbQhJG7cJxRGY&sp=CAI%253D")
+                val con = url.openConnection() as HttpURLConnection
+
+                val `is` = con.inputStream
+                val isr = InputStreamReader(`is`,"UTF-8")
                 val reader = BufferedReader(isr)
 
                 while (true) {
@@ -88,6 +97,7 @@ class VideoViewModel : ViewModel() {
                 }
 
             } catch (e: IOException) {
+                Log.d("아아아아아", "아아아아아")
                 e.printStackTrace()
                 viewModelScope.launch {
                     Toast.makeText(context, "인터넷이 연결되어 있지 않습니다.", Toast.LENGTH_SHORT).show()

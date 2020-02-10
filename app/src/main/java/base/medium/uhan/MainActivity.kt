@@ -7,6 +7,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -22,6 +23,10 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.google.android.ads.nativetemplates.NativeTemplateStyle
+import com.google.android.ads.nativetemplates.TemplateView
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.formats.UnifiedNativeAd
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -29,12 +34,14 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
+import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
 
     internal var permission_list = arrayOf(Manifest.permission.INTERNET)
     internal var url = "http://ncov.mohw.go.kr/index_main.jsp"
+    internal var dialog :CustomDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,10 +59,21 @@ class MainActivity : AppCompatActivity() {
 
         checkPermission()
 
-        MobileAds.initialize(this) { initializationStatus -> }
-        val mAdView = findViewById<AdView>(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+
+        MobileAds.initialize(this, "ca-app-pub-4839780422288243~6698332535")
+        val adLoader = AdLoader.Builder(this, "ca-app-pub-4839780422288243/3465556735")
+                .forUnifiedNativeAd { unifiedNativeAd ->
+                    val styles = NativeTemplateStyle.Builder().build()
+
+                    val template = findViewById<TemplateView>(R.id.my_template)
+                    template.setStyles(styles)
+                    template.setNativeAd(unifiedNativeAd)
+                }
+                .build()
+
+        val request = AdRequest.Builder().build()
+        adLoader.loadAd(request)
+
 
         val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = cm.activeNetworkInfo
@@ -64,12 +82,23 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
+        var th = this
+
         lifecycleScope.launch {
 
-            var num : Elements
+            var num : Elements? = null
             var job = lifecycleScope.async(Dispatchers.IO) {
-                var item = Jsoup.connect(url).get()
-                var num = item.select(".num")
+
+                try {
+                    var item = Jsoup.connect(url).get()
+                    num = item.select(".num")
+
+                } catch (e :IOException) {
+                    Log.d("호호호호호", "호호호호호")
+                    e.printStackTrace()
+                    Toast.makeText(th, "질병관리본부 메인 홈페이지에 접속할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                }
+
                 num
             }
 
@@ -78,18 +107,19 @@ class MainActivity : AppCompatActivity() {
             var one = findViewById<View>(R.id.state_one) as TextView
             var two = findViewById<View>(R.id.state_two) as TextView
             var three = findViewById<View>(R.id.state_three) as TextView
-            one.setText("확진: " + num!!.get(0).text())
-            two.setText("퇴원: " + num!!.get(1).text())
-            three.setText("검사진행: " + num!!.get(2).text())
+
+            try {
+                one.setText("확진: " + num!!.get(0).text())
+                two.setText("퇴원: " + num!!.get(1).text())
+                three.setText("검사진행: " + num!!.get(2).text())
+            } catch (e :IndexOutOfBoundsException) {
+                Toast.makeText(th, "질병관리본부 메인 홈페이지에 접속할 수 없습니다.", Toast.LENGTH_SHORT).show()
+
+            }
+
+
 
         }
-
-
-
-
-
-
-
 
 
 
@@ -131,8 +161,8 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        val dialog = CustomDialog(this)
-        dialog.show()
+        dialog = CustomDialog(this)
+        dialog!!.show()
 
     }
 
