@@ -61,7 +61,7 @@ class PubViewModel : ViewModel() {
                 map.set("title", item.select(".bl_link").text())
                 map.set("link", item.select(".bl_link").attr("href"))
                 map.set("date", item.select("tr > td:eq(3)").text())
-                map.set("key", item.select(".bl_link").attr("onclick").substring(50, 56))
+                map.set("key", item.select(".bl_link").attr("onclick").substring(46,50))
 
                 mapList.add(map)
             }

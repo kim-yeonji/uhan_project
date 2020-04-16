@@ -32,8 +32,8 @@ public class CustomDialog extends AlertDialog {
         TextView quit = (TextView) findViewById(R.id.finish);
         TextView cancel = (TextView) findViewById(R.id.cancel);
 
-        MobileAds.initialize(context, "ca-app-pub-4839780422288243~6698332535");
-        AdLoader adLoader = new AdLoader.Builder(context, "ca-app-pub-4839780422288243/6140015051")
+        MobileAds.initialize(context, "ca-app-pub-7936537457822660~5853445724");
+        AdLoader adLoader = new AdLoader.Builder(context, "ca-app-pub-7936537457822660/2207903667")
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
                     public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {

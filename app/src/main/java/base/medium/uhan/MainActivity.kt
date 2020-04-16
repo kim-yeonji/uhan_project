@@ -23,6 +23,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.ads.nativetemplates.NativeTemplateStyle
 import com.google.android.ads.nativetemplates.TemplateView
 import com.google.android.gms.ads.AdLoader
@@ -60,8 +63,8 @@ class MainActivity : AppCompatActivity() {
         checkPermission()
 
 
-        MobileAds.initialize(this, "ca-app-pub-4839780422288243~6698332535")
-        val adLoader = AdLoader.Builder(this, "ca-app-pub-4839780422288243/3465556735")
+        MobileAds.initialize(this, "ca-app-pub-7936537457822660~5853445724")
+        val adLoader = AdLoader.Builder(this, "ca-app-pub-7936537457822660/3520985332")
                 .forUnifiedNativeAd { unifiedNativeAd ->
                     val styles = NativeTemplateStyle.Builder().build()
 
@@ -73,6 +76,7 @@ class MainActivity : AppCompatActivity() {
 
         val request = AdRequest.Builder().build()
         adLoader.loadAd(request)
+
 
 
         val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -111,7 +115,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 one.setText("확진: " + num!!.get(0).text())
                 two.setText("퇴원: " + num!!.get(1).text())
-                three.setText("검사진행: " + num!!.get(2).text())
+                three.setText("사망: " + num!!.get(3).text())
             } catch (e :IndexOutOfBoundsException) {
                 Toast.makeText(th, "질병관리본부 메인 홈페이지에 접속할 수 없습니다.", Toast.LENGTH_SHORT).show()
 
@@ -161,8 +165,10 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
+
         dialog = CustomDialog(this)
         dialog!!.show()
+
 
     }
 
